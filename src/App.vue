@@ -1,9 +1,7 @@
 <template>
   <div class="entry">
-    <div class="container">
-      <div class="contentWrapper">
-        <div class="content">
-          <h2>山寨版掘金官网</h2>
+    <div class="maincontainer">
+          <h2 id="maintitle">山寨版掘金官网</h2>
           <div class="userContainer">
             <img id="userIcon" src="./assets/kenan.jpg" />
             <div class="userMsg">
@@ -33,9 +31,9 @@
               <div class="tagValue">前端</div>
             </div>
           </div>
-        </div>
-
-        <div class="commentContainer">
+                
+    </div>
+    <div class="commentContainer">
           <div class="myComment">
             <div style="font-size: 16px; font-weight: 800">评论</div>
             <div class="commentPlace">
@@ -51,11 +49,6 @@
             </div>
           </div>
         </div>
-        
-      </div>
-
-      <div class="rightTab"></div>
-    </div>
   </div>
 </template>
 
@@ -66,34 +59,44 @@ body {
 .entry {
   width: 100vw;
 }
-/* 1420px */
-.entry .container {
-  /* width: 74vw; */
-  width: 1120px;
-  text-align: justify;
-  margin: 20px auto;
+.entry .maincontainer {
+  width: 800px;
+  margin: auto;
   background-color: white;
-  display: flex;
-  justify-content: space-between;
 }
 /* 正文部分 */
-/* 1020px */
-.entry .container .contentWrapper {
-  width: 1020px;
-  /* background-color: yellow; */
-  margin-top: 20px;
-  margin-left: 20px;
-  /* border:solid 1px; */
-  border-radius: 4px;
+#maintitle{
+  width: 100%;
+  height: 20px;
+  padding: 20px 20px;
+  
 }
-.content .userContainer {
+.userContainer {
+  width: 750px;
+  height: 60px;
   display: flex;
+  margin: auto;
   justify-content: space-around;
-  line-height: 20px;
-  letter-spacing: 1px;
   align-items: center;
 }
-.content .userContainer .userMsg .timeContainer {
+
+
+#userIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.userContainer .userMsg{
+  /* 不写高度，让文本行高撑起高度 */
+  width: 550px;
+  line-height: 20px;
+  letter-spacing: 1px;
+}
+#userName {
+  color: #515b70;
+}
+
+.userContainer .userMsg .timeContainer {
   color: #8f94ab;
 }
 
@@ -122,26 +125,11 @@ body {
   color: #515767;
 }
 
-#userName {
-  color: #515b70;
-}
-#userIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-/* 375px */
-/* 不用管这一段 */
-.entry .container .rightTab {
-  width: 375px;
-  height: 100vh;
-  background-color: red;
-}
 
 .tagWrapper {
   display: flex;
   width: 250px;
+  padding: 20px 20px;
   font-size: 14px;
   justify-content: space-around;
 }
