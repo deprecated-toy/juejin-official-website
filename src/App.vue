@@ -1,54 +1,73 @@
 <template>
   <div class="entry">
     <div class="maincontainer">
-          <h2 id="maintitle">山寨版掘金官网</h2>
-          <div class="userContainer">
-            <img id="userIcon" src="./assets/kenan.jpg" />
-            <div class="userMsg">
-              <div id="userName" style="width: 700px">mahoushoujyo</div>
-              <div class="timeContainer">
-                <span>2022年08月13日 </span>
-                <span>15:29</span>
-                <span> · 阅读 {{ readerCount }}</span>
-              </div>
-            </div>
-            <div style="width: 120px">
-              <button :class="btnStatus.className" @click="changeBtnStatus">
-                {{ btnStatus.btncontent }}
-              </button>
-            </div>
-          </div>
-
-          <v-md-preview style="margin-left: 0" :text="text"></v-md-preview>
-
-          <div class="tagWrapper">
-            <div class="tagContainer">
-              <div class="tagName">分类:</div>
-              <div class="tagValue">前端</div>
-            </div>
-            <div class="tagContainer">
-              <div class="tagName">标签:</div>
-              <div class="tagValue">前端</div>
-            </div>
-          </div>
-                
-    </div>
-    <div class="commentContainer">
-          <div class="myComment">
-            <div style="font-size: 16px; font-weight: 800">评论</div>
-            <div class="commentPlace">
-              <div class="iconWrapper">
-                <img class="icon" src="./assets/kenan.jpg" />
-              </div>
-              <div  class="comment">
-                <textarea  id="textPlace" ></textarea>
-                <div class="hideArea">
-                </div>
-              </div>
-              
-            </div>
+      <h2 id="maintitle">山寨版掘金官网</h2>
+      <div class="userContainer">
+        <img id="userIcon" src="./assets/kenan.jpg" />
+        <div class="userMsg">
+          <div id="userName" style="width: 700px">mahoushoujyo</div>
+          <div class="timeContainer">
+            <span>2022年08月13日 </span>
+            <span>15:29</span>
+            <span> · 阅读 {{ readerCount }}</span>
           </div>
         </div>
+        <div style="width: 120px">
+          <button :class="btnStatus.className" @click="changeBtnStatus">
+            {{ btnStatus.btncontent }}
+          </button>
+        </div>
+      </div>
+
+      <v-md-preview style="margin-left: 0" :text="text"></v-md-preview>
+      
+      <div class="tagWrapper">
+        <div class="tagContainer">
+          <div class="tagName">分类:</div>
+          <div class="tagValue">前端</div>
+        </div>
+        <div class="tagContainer">
+          <div class="tagName">标签:</div>
+          <div class="tagValue">前端</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commentContainer">
+      <div class="myCommentTitle">评论</div>
+      <div class="myCommentWrapper">
+        <div class="iconWrapper">
+          <img class="icon" src="./assets/kenan.jpg" />
+        </div>
+        <div class="inputAreaWrapper">
+          <a-textarea
+            class="inputArea"
+            @change="textchange"
+            :auto-size="{ minRows: 3 }"
+            v-model:value="inputValue"
+            placeholder="请输入评论(Enter换行)"
+            @click="showHideArea"
+          ></a-textarea>
+          <div class="hideArea" :style="hide">
+            <div class="emojiWrapper">
+              <div class="emoji">
+                <img class="emojiIcon" src="./assets/smile.png" />
+                <span class="emojiText">表情</span>
+              </div>
+              <div class="emoji">
+                <img class="emojiIcon" src="./assets/picture.png" />
+                <span class="emojiText">图片</span>
+              </div>
+            </div>
+            <a-button type="primary" :disabled="btnCommentStatus">发表评论</a-button>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+
+    <div>相关推荐</div>
   </div>
 </template>
 
@@ -60,16 +79,17 @@ body {
   width: 100vw;
 }
 .entry .maincontainer {
+  /* 正文宽度 */
   width: 800px;
-  margin: auto;
+  margin: 20px auto;
+  border-radius: 4px;
   background-color: white;
 }
 /* 正文部分 */
-#maintitle{
+#maintitle {
   width: 100%;
   height: 20px;
   padding: 20px 20px;
-  
 }
 .userContainer {
   width: 750px;
@@ -80,13 +100,12 @@ body {
   align-items: center;
 }
 
-
 #userIcon {
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
-.userContainer .userMsg{
+.userContainer .userMsg {
   /* 不写高度，让文本行高撑起高度 */
   width: 550px;
   line-height: 20px;
@@ -101,6 +120,20 @@ body {
 }
 
 /* 关注按钮未点击 */
+
+button {
+  border-radius: 8px;
+  background-color: #f4f9ff;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  /* 设置鼠标样式 */
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
 .btnUnclick,
 .btnUnclick:focus {
   outline: none;
@@ -124,7 +157,6 @@ body {
   border-color: #a7aab2;
   color: #515767;
 }
-
 
 .tagWrapper {
   display: flex;
@@ -151,60 +183,90 @@ body {
 }
 
 /*##### comment #####*/
+
 .commentContainer {
-  width: 100%;
-  margin-top: 20px;
-  margin-left: 0;
-  background-color: red;
-  border-radius: 3px;
+  width: 800px;
+  margin: auto;
+  /* margin-bottom: 100px; */
+  border-radius: 4px;
+  background-color: white;
 }
-.myComment{
-  width:95% ;
+.myCommentTitle {
+  font-size: 20px;
+  font-weight: 800;
+  padding: 20px 20px;
 }
-
-.myComment .commentPlace {
- width: 95%;
- height:140px;
- margin: auto;
- /* margin-top: 10px; */
- display: flex;
- justify-content: space-around;
+.myCommentWrapper {
+  width: 750px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  /* background-color: black; */
 }
-
-.myComment .iconWrapper {
-  width: 5%;
+.iconWrapper {
+  width: 40px;
+  /* background-color: red; */
 }
-.commentContainer .icon {
-  width: 30px;
-  height: 30px;
+.iconWrapper .icon {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
-
-.commentPlace .comment{
-  width:90%;
-  height:100% ;
-
+.inputAreaWrapper {
+  width: 650px;
 }
-
-#textPlace{
+.inputAreaWrapper .inputArea {
   width: 100%;
-  height: 65%;
 }
-.commentPlace .comment .hideArea{
+.inputAreaWrapper .hideArea {
   width: 100%;
-  height: 30%;
-  background-color: yellow;
+  height: 40px;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.hideArea .emojiWrapper {
+  width: 130px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.emoji {
+  width: 50px;
+  height: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.emoji .emojiIcon {
+  width: 20px;
+  height: 20px;
+}
+.emoji .emojiText {
+  color: #8a919f;
+  font-size: 12px;
+}
 </style>
 
 <script lang="ts">
 import { ref, reactive } from "vue";
 import markdownText from "./assets/test.md?raw";
+import { Textarea, Button } from "ant-design-vue";
+import "ant-design-vue/dist/antd.css";
+
 export default {
+  components: {
+    ATextarea: Textarea,
+    AButton: Button,
+  },
   setup() {
     const text = ref(markdownText);
+    const inputValue = ref<String>("");
+    const btnCommentStatus = ref<boolean>(true);
     const readerCount = ref(538);
     const btnStatus = reactive({
       active: false,
@@ -222,11 +284,27 @@ export default {
       btnStatus.className = "btnUnclick";
       btnStatus.btncontent = "＋ 关注";
     };
+    const hide = ref<String>("display: none;");
+    const showHideArea = () => {
+      hide.value = "";
+    };
+
+    const textchange = function () {
+      if (text.value != "") {
+        btnCommentStatus.value = false;
+      }
+    };
+
     return {
       text,
       readerCount,
       btnStatus,
       changeBtnStatus,
+      hide,
+      showHideArea,
+      inputValue,
+      textchange,
+      btnCommentStatus,
     };
   },
 };

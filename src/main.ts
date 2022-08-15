@@ -15,6 +15,7 @@ import '@kangc/v-md-editor/lib/theme/style/github.css';
 import hljs from 'highlight.js';
 
 
+
 VMdPreview.use(githubTheme, {
   Hljs: hljs
 });
@@ -24,6 +25,7 @@ VMdPreview.use(githubTheme, {
 //初始化app
 const app = createApp(App);
 app.use(VMdPreview);
+
 //   app.use(VueMarkdownEditor);
   app.mount('#app');
 // const app=createApp(App).mount('#app')
