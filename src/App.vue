@@ -1,6 +1,6 @@
-<template>
-  <div class="entry">
-    <div class="maincontainer">
+<template >
+  <div class="entry" ref="scrollDiv" @scroll="onScroll" >
+    <div class="maincontainer"  >
       <h2 id="maintitle">山寨版掘金官网</h2>
       <div class="userContainer">
         <img id="userIcon" src="./assets/kenan.jpg" />
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div class="commentContainer">
+    <div class="commentContainer" >
       <div class="myCommentTitle">评论</div>
       <div class="myCommentWrapper">
         <div class="iconWrapper">
@@ -66,8 +66,14 @@
         
       </div>
     </div>
-
-    <div>相关推荐</div>
+<!-- 处理Card组件就完事了 -->
+    <div class="recommendContainer">
+      <div class="title">相关推荐</div>
+      <div class="recommend" v-for="item in users">
+        <Card :user="item"></Card>
+      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -75,12 +81,17 @@
 body {
   background-color: #f4f5f5;
 }
+
 .entry {
   width: 100vw;
+  height: 100vh;
+  overflow:auto;
 }
 .entry .maincontainer {
   /* 正文宽度 */
   width: 800px;
+  /* height: 200px; */
+  overflow: auto;
   margin: 20px auto;
   border-radius: 4px;
   background-color: white;
@@ -198,6 +209,7 @@ button {
 }
 .myCommentWrapper {
   width: 750px;
+  padding-bottom: 10px;
   margin: auto;
   display: flex;
   justify-content: space-around;
@@ -250,20 +262,49 @@ button {
   color: #8a919f;
   font-size: 12px;
 }
+.recommendContainer{
+  width:800px ;
+  background-color: white;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.recommendContainer .title{
+  margin-left: 20px;
+  padding: 20px 0;
+  font-size: 20px;
+}
+.recommendContainer .recommend{
+  width: 750px;
+  margin: auto;
+}
+
 </style>
 
 <script lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive,onMounted,onUnmounted } from "vue";
 import markdownText from "./assets/test.md?raw";
 import { Textarea, Button } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
+import Card from "./components/Card.vue"
+import Card1 from "./components/Card.vue";
 
 export default {
   components: {
     ATextarea: Textarea,
     AButton: Button,
-  },
+    Card: Card,
+    Card1
+},
   setup() {
+    
+    const testIndex = ref(1)
+    const users = reactive([{
+      name:"mahoushoujyo",
+      time:"2年前"
+    }])
+    
     const text = ref(markdownText);
     const inputValue = ref<String>("");
     const btnCommentStatus = ref<boolean>(true);
@@ -294,6 +335,29 @@ export default {
         btnCommentStatus.value = false;
       }
     };
+    const scrollDiv = ref();
+    
+    const onScroll = function (){
+      let scrolltop = scrollDiv.value.scrollTop;//滚轮上端距离顶部高度
+      let winHeight = scrollDiv.value.clientHeight;//界面视口高度
+      let scrollHeight = scrollDiv.value.scrollHeight;//整个滚轮的高度
+      let user = {
+        name:'mahoushoujyo',
+        time:'两年前'
+      }
+      
+      if(scrolltop + winHeight+1 >= scrollHeight){
+
+        users.push(user);
+        users.push(user);
+      }
+      
+    };
+    // onMounted(()=>{
+    //   onScroll();
+    // })
+    
+    
 
     return {
       text,
@@ -305,6 +369,9 @@ export default {
       inputValue,
       textchange,
       btnCommentStatus,
+      users,
+      scrollDiv,
+      onScroll
     };
   },
 };
