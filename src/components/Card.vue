@@ -27,7 +27,7 @@
 
 <style>
 .container{
-    width: 750px;
+    width: 720px;
     letter-spacing: 1px;
 }
 .container .division{
