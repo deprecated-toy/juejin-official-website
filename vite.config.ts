@@ -10,6 +10,9 @@ export default defineConfig({
     port: 9000,
     strictPort: true,
     open: true
+  },
+  build: {
+    outDir: "docs"
   }
 });
 
