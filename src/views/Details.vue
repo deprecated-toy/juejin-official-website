@@ -1,5 +1,7 @@
 <template >
   <div class="entry" ref="scrollDiv" @scroll="onScroll" >
+    <LeftSideBar top="100px" left="250px"></LeftSideBar>
+    <RightSideBar top="100px" left="1200px" :data="data"></RightSideBar>
     <div class="maincontainer"  >
       <h2 id="maintitle">山寨版掘金官网</h2>
       <div class="userContainer">
@@ -286,10 +288,14 @@ import markdownText from "../assets/test.md?raw";
 import { Textarea, Button } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import Card from "../components/Card.vue"
+import LeftSideBar from "../components/LeftSideBar.vue";
+import RightSideBar from "../components/RightSideBar.vue";
 
 export default {
   name: "Details",
   components: {
+    RightSideBar,
+    LeftSideBar,
     ATextarea: Textarea,
     AButton: Button,
     Card: Card
@@ -353,7 +359,7 @@ export default {
     // onMounted(()=>{
     //   onScroll();
     // })
-    
+    const data = {"介绍": [], "启动": [], "技术栈": []};
     
 
     return {
@@ -368,7 +374,8 @@ export default {
       btnCommentStatus,
       users,
       scrollDiv,
-      onScroll
+      onScroll,
+      data
     };
   },
 };
