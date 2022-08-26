@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import LeftSideBar from "./components/LeftSideBar.vue";
-import RightSideBar from "./components/RightSideBar.vue";
+
 </script>
 
 <template>
-<!--  <LeftSideBar top="20px" left="10px"></LeftSideBar>-->
-  <RightSideBar></RightSideBar>
+  <router-view></router-view>
 </template>
 
 <style scoped>
 
 </style>
+
+<script lang="ts">
+
+</script>
