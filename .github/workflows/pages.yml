@@ -44,3 +44,5 @@ jobs:
           path: ./dist
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
+        with:
+          path: ${{ runner.temp }}/artifact.tar
