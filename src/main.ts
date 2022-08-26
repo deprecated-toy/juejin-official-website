@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import router from "./router/router";
 
 //引入markdown文件预览组件（VMdPreview），来实现展示markdown到html上
 import VMdPreview from '@kangc/v-md-editor/lib/preview'; 
@@ -24,7 +25,8 @@ VMdPreview.use(githubTheme, {
 
 //初始化app
 const app = createApp(App);
-app.use(VMdPreview);
+app.use(VMdPreview)
+    .use(router);
 
 //   app.use(VueMarkdownEditor);
   app.mount('#app');

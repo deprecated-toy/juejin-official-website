@@ -3,7 +3,7 @@
     <div class="maincontainer"  >
       <h2 id="maintitle">山寨版掘金官网</h2>
       <div class="userContainer">
-        <img id="userIcon" src="./assets/kenan.jpg" />
+        <img id="userIcon" src="../assets/kenan.jpg" />
         <div class="userMsg">
           <div id="userName" style="width: 700px">mahoushoujyo</div>
           <div class="timeContainer">
@@ -37,7 +37,7 @@
       <div class="myCommentTitle">评论</div>
       <div class="myCommentWrapper">
         <div class="iconWrapper">
-          <img class="icon" src="./assets/kenan.jpg" />
+          <img class="icon" src="../assets/kenan.jpg" />
         </div>
         <div class="inputAreaWrapper">
           <a-textarea
@@ -51,11 +51,11 @@
           <div class="hideArea" :style="hide">
             <div class="emojiWrapper">
               <div class="emoji">
-                <img class="emojiIcon" src="./assets/smile.png" />
+                <img class="emojiIcon" src="../assets/smile.png" />
                 <span class="emojiText">表情</span>
               </div>
               <div class="emoji">
-                <img class="emojiIcon" src="./assets/picture.png" />
+                <img class="emojiIcon" src="../assets/picture.png" />
                 <span class="emojiText">图片</span>
               </div>
             </div>
@@ -282,12 +282,13 @@ button {
 
 <script lang="ts">
 import { ref, reactive,onMounted,onUnmounted } from "vue";
-import markdownText from "./assets/test.md?raw";
+import markdownText from "../assets/test.md?raw";
 import { Textarea, Button } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
-import Card from "./components/Card.vue"
+import Card from "../components/Card.vue"
 
 export default {
+  name: "Details",
   components: {
     ATextarea: Textarea,
     AButton: Button,

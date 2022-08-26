@@ -10,7 +10,7 @@
           <span :class="select.hotpoint" @click="selectHotpoint">热榜</span>
         </div>
         <div class="recommendWrapper">
-          <div class="recommend" v-for="item in users">
+          <div class="recommend" v-for="item in users" @click="OnClick">
             <Card :user="item"></Card>
           </div>
         </div>
@@ -18,8 +18,8 @@
       <div class="expandContainer">
         <div class="container helloCard">
           <div class="topWrapper">
-            <img class="icon" src="./assets/dir.png" />
-            <div style="font-size: 20px; font-weight=600;margin-left: 10px;">
+            <img class="icon" src="../assets/dir.png" />
+            <div style="font-size: 20px; font-weight: 600;margin-left: 10px;">
               下午好！
             </div>
             <a-button style="margin-left: 20px" type="primary">去签到</a-button>
@@ -139,15 +139,17 @@ body {
 
 <script lang="ts">
 import { reactive, ref } from "vue";
-import Card from "./components/Card.vue";
+import Card from "../components/Card.vue";
 import { Button } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
+import {useRouter} from "vue-router";
 export default {
+  name: "Index",
   components: {
     Card: Card,
     AButton: Button,
   },
-  setup() {
+  setup: function () {
     const users = reactive([
       {
         name: "mahoushoujyo",
@@ -208,6 +210,12 @@ export default {
         users.push(user);
       }
     };
+    const router = useRouter();
+    const OnClick = () => {
+      router.push({
+        path: "/details"
+      })
+    };
 
     return {
       select,
@@ -217,6 +225,7 @@ export default {
       users,
       scrollDiv,
       onScroll,
+      OnClick
     };
   },
 };
