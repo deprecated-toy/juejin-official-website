@@ -36,7 +36,6 @@ jobs:
           node-version: 16
       - name: Build Page
         run: |
-          cd juejin-official-website
           npm install
           npm run build
       - name: Deploy Page 🚀
