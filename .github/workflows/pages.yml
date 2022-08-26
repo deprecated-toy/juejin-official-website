@@ -38,7 +38,9 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: Deploy Page 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          folder: dist # The folder the action should deploy.
+          path: ./dist
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
